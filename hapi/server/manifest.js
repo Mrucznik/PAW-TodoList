@@ -12,6 +12,7 @@ module.exports = new Confidence.Store({
     server: {
         host: '0.0.0.0',
         port: process.env.PORT || 3000,
+        routes: { cors: true },
         debug: {
             $filter: 'NODE_ENV',
             development: {
