@@ -2,15 +2,21 @@
   "name": "mruello",
   "version": "1.0.0",
   "main": "lib/index.js",
+  "license": "MIT",
   "scripts": {
     "start": "node server",
     "test": "lab -a code -L",
     "lint": "eslint ."
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Mrucznik/PAW-TodoList.git"
+  },
   "dependencies": {
     "boom": "7.x.x",
     "haute-couture": "3.x.x",
-    "joi": "13.x.x"
+    "joi": "13.x.x",
+    "neo4j-driver": "^1.7.0"
   },
   "devDependencies": {
     "code": "5.x.x",
