@@ -1,0 +1,33 @@
+
+.board {
+    margin: 0 auto;
+    height: 100vh;
+    background-color:#3b3635;
+}
+
+.row
+{
+    display: table;
+    align-content: flex-start;
+    border-spacing: 10px; /*Optional*/
+}
+
+.list{
+    width: 150px;
+    display: table-cell;
+    align-content: top;
+    background-color: red;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.card{
+    width: 140px;
+    height: 100px;
+    margin: 5px;
+    background-color: white;
+    border-radius: 5px;
+}
+.addCardButton{
+    margin: 5px;
+}
