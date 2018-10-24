@@ -1,7 +1,7 @@
 # hapi-mysql
 
 ## To install and build and run project:
-- You need .env file with parameters:
+- You need server/.env file with parameters:
   - PORT (8080 best)
   - NODE_ENV
   - DB_HOST
