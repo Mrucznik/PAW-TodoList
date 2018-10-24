@@ -18,4 +18,26 @@ module.exports = class Lists extends Schwifty.Model {
             list_id: Joi.number().integer()
         }); // eslint-disable-line no-undef
     }
+
+    static get relationMappings() {
+
+        return {
+            boards: {
+                relation: Schwifty.Model.BelongsToOneRelation,
+                modelClass: require('./Boards'),
+                join: {
+                    from: 'boards.id',
+                    to: 'lists.board_id'
+                }
+            },
+            cards: {
+                relation: Schwifty.Model.HasManyRelation,
+                modelClass: require('./Cards'),
+                join: {
+                    from: 'lists.id',
+                    to: 'cards.list_id'
+                }
+            }
+        };
+    }
 };
