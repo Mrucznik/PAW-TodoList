@@ -14,7 +14,8 @@
     "joi": "13.x.x",
     "mysql": "^2.16.0",
     "objection": "1.x.x",
-    "schwifty": "4.x.x"
+    "schwifty": "4.x.x",
+    "tandy": "^1.0.4"
   },
   "peerDependencies": {
     "knex": "0.15.x"

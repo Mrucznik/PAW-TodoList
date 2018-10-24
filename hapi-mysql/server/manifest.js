@@ -3,6 +3,7 @@
 const Dotenv = require('dotenv');
 const Confidence = require('confidence');
 const Toys = require('toys');
+const Tandy = require('tandy');
 
 // Pull .env into process.env
 Dotenv.config({ path: `${__dirname}/.env` });
@@ -18,6 +19,12 @@ module.exports = new Confidence.Store({
                 log: ['error', 'implementation', 'internal'],
                 request: ['error', 'implementation', 'internal']
             }
+        },
+        routes: {
+            cors: {
+                $filter: 'NODE_ENV',
+                development: true
+            }
         }
     },
     register: {
@@ -28,6 +35,9 @@ module.exports = new Confidence.Store({
             },
             {
                 plugin: './plugins/swagger'
+            },
+            {
+                plugin: 'tandy'
             },
             {
                 plugin: 'schwifty',
