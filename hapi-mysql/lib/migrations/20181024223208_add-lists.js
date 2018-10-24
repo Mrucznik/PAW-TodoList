@@ -3,7 +3,7 @@
 exports.up = function(knex, Promise) {
     return knex.schema.createTable('lists', (table) => {
         table.increments('id').primary();
-        table.string('name').notNullable();
+        table.text('name').notNullable();
         table.integer('board_id').notNullable();
         table.index('board_id');
     });
