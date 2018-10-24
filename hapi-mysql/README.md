@@ -10,10 +10,10 @@
   - DB_DATABASE
   - DB_CHARSET
  - You need to migrate latest database models to your mysql database:
-  - npx knex migrate:latest
+    - npx knex migrate:latest
  - You need to install and start npm project
-  - npm install
-  - npm start
+    - npm install
+    - npm start
  - ???
  - Profit
  
