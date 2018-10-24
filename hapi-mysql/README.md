@@ -9,7 +9,7 @@
   - DB_PASSWORD
   - DB_DATABASE
   - DB_CHARSET
- - You need to migrate latest database models to your mysql database:
+ - You need to migrate latest database models to your mysql database (if you don't have tables in your database):
     - npx knex migrate:latest
  - You need to install and start npm project
     - npm install
