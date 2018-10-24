@@ -3,9 +3,9 @@
 ## To install and build and run project:
 - You need server/.env file with parameters:
   - PORT (8080 best)
-  - NODE_ENV
+  - NODE_ENV (development/production)
   - DB_HOST
-  - DB_USER=paw
+  - DB_USER
   - DB_PASSWORD
   - DB_DATABASE
   - DB_CHARSET
