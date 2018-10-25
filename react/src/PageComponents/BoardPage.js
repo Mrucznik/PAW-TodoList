@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import './Board.css'
 import axios from "axios";
 
 class Card extends Component {
-
     render() {
         return(
             <div className="card">
@@ -42,13 +40,14 @@ class List extends Component {
 }
 
 
-class Board extends Component {
+class BoardPage extends Component {
     state = {
         lists : []
     };
 
     constructor(props){
         super(props);
+        console.log(props);
         this.prepareLists();
     }
 
@@ -70,4 +69,4 @@ class Board extends Component {
     }
 }
 
-export default Board;
+export default BoardPage;
