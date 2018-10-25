@@ -1,12 +1,15 @@
 import React, {Component} from "react";
+import { Link } from 'react-router-dom';
 import axios from "axios";
 
 class Board extends Component {
-
     render(){
         return (
             <div className={"Board"}>
                 {this.props.name}
+                <Link to={"/board/" + this.props.id}>
+                    Przejdź do
+                </Link>
             </div>
         )
     }
@@ -16,7 +19,7 @@ class Board extends Component {
 class BoardsPage extends Component {
     state = {
         boards: []
-    }
+    };
 
     constructor(){
         super();
@@ -31,14 +34,12 @@ class BoardsPage extends Component {
     }
 
     render() {
-        console.log(this.state.boards);
         return (
             <div>
                 <div className="header">
-
                 </div>
                 <div className="body">
-                    {this.state.boards.map(board => <Board name={board.name}/>)}
+                    {this.state.boards.map(board => <Board name={board.name} id={board.id} />)}
                 </div>
             </div>
         )
