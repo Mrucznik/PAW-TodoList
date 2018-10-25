@@ -2,7 +2,7 @@
 .board {
     margin: 0 auto;
     height: 100vh;
-    background-color:#3b3635;
+    background-color: #6fcaff;
 }
 
 .row
@@ -13,21 +13,25 @@
 }
 
 .list{
-    width: 150px;
     display: table-cell;
-    align-content: top;
-    background-color: red;
+    background-color: #c4e5ff;
     margin: 10px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px;
+    max-width: 300px;
+}
+
+.card, .addCardButton{
+    text-align: left;
+    width: 90%;
+    min-height: 30px;
+    padding: 5px;
+    margin: 5px;
+    background-color: #ffffff;
     border-radius: 5px;
 }
 
-.card{
-    width: 140px;
-    height: 100px;
-    margin: 5px;
-    background-color: white;
-    border-radius: 5px;
-}
-.addCardButton{
-    margin: 5px;
+.addCardButton {
+    text-align: center;
 }

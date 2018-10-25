@@ -53,15 +53,13 @@ class Board extends Component {
     }
 
     async prepareLists() {
-        console.log('http://localhost:8080/boards/' + this.props.board_id + '/lists');
-        axios.get('http://localhost:8080/boards/' + this.props.board_id + '/lists').then(res => {
+        axios.get('http://localhost:8080/boards/' + this.props.match.params.id + '/lists').then(res => {
             const lists = res.data.lists;
             this.setState({ lists });
         });
     }
 
     render() {
-        console.log(this.state.lists);
         return (
             <div className="board">
                 <div className="row">

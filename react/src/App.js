@@ -5,26 +5,12 @@ import BoardsPage from "./PageComponents/BoardsPage";
 import Board from "./Board";
 
 class App extends Component {
-    state = {
-        board_id: 1
-    };
-
-    constructor() {
-        super();
-        this.updateBoard.bind(this);
-    }
-
-    updateBoard(board_id) {
-        this.setState({board_id});
-        console.log(board_id);
-    }
-
     render() {
         return (
             <Router>
                 <div>
-                <Route path={"/"} component={() => <BoardsPage/>} exact/>
-                <Route path={"/board"} component={() => <Board board_id={this.state.board_id}/>}/>
+                    <Route path={"/"} component={() => <BoardsPage/>} exact/>
+                    <Route path={"/board/:id"} component={Board}/>
                 </div>
             </Router>
         );
