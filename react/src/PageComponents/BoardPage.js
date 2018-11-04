@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
+import ChangeableText from './ChangeableText';
 import axios from "axios";
 
 class Card extends Component {
     render() {
         return(
             <div className="card">
-                {this.props.name}
+                <ChangeableText text={this.props.name} />
             </div>
         )
     }
@@ -31,7 +32,7 @@ class List extends Component {
     render() {
         return (
             <div className="list">
-                {this.props.name}
+                <ChangeableText text={this.props.name} />
                 {this.state.cards.map(card => <Card name={card.name}/>)}
                 <button className="addCardButton">Add Card</button>
             </div>

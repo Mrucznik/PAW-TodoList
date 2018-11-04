@@ -36,8 +36,6 @@ class BoardsPage extends Component {
     render() {
         return (
             <div>
-                <div className="header">
-                </div>
                 <div className="body">
                     {this.state.boards.map(board => <Board name={board.name} id={board.id} />)}
                 </div>

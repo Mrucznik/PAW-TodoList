@@ -7,12 +7,16 @@ import BoardPage from "./PageComponents/BoardPage";
 class App extends Component {
     render() {
         return (
-            <Router>
-                <div>
-                    <Route path={"/"} component={BoardsPage} exact/>
-                    <Route path={"/board/:id"} component={BoardPage}/>
+            <div>
+                <div className="header">
                 </div>
-            </Router>
+                <Router>
+                    <div>
+                        <Route path={"/"} component={BoardsPage} exact/>
+                        <Route path={"/board/:id"} component={BoardPage}/>
+                    </div>
+                </Router>
+            </div>
         );
     }
 }
