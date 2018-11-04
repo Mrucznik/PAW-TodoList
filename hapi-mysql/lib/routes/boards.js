@@ -5,6 +5,18 @@ const Joi = require('joi');
 module.exports = [
     {
         method: 'GET',
+        path: '/boards',
+        options: {
+            description: 'Get boards',
+            notes: 'Returns all boards',
+            tags: ['api'],
+            handler: {
+                tandy: {}
+            }
+        }
+    },
+    {
+        method: 'GET',
         path: '/boards/{id}/lists',
         options: {
             description: 'Get board lists',
