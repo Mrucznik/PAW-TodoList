@@ -48,5 +48,45 @@ module.exports = [
                 tandy: {}
             }
         }
+    },
+    {
+        method: 'POST',
+        path: '/lists/{id}/cards',
+        options: {
+            description: 'Create new card in list',
+            notes: 'Create new card associated with list of secified id',
+            tags: ['api'],
+            validate: {
+                params: {
+                    id: Joi.number().required()
+                },
+                payload: {
+                    name: Joi.string().required()
+                }
+            }
+        },
+        handler: {
+            tandy: {}
+        }
+    },
+    {
+        method: 'PATCH',
+        path: '/lists/{id}',
+        options: {
+            description: 'Modify a list',
+            notes: 'Modify name of a list',
+            tags: ['api'],
+            validate: {
+                params: {
+                    id: Joi.number().required()
+                },
+                payload: {
+                    name: Joi.string().required()
+                }
+            }
+        },
+        handler: {
+            tandy: {}
+        }
     }
 ];
