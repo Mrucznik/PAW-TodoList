@@ -31,5 +31,25 @@ module.exports = [
                 tandy: {}
             }
         }
+    },
+    {
+        method: 'PATCH',
+        path: '/cards/{id}',
+        options: {
+            description: 'Modify a card',
+            notes: 'Modify name of a card',
+            tags: ['api'],
+            validate: {
+                params: {
+                    id: Joi.number().required()
+                },
+                payload: {
+                    name: Joi.string().required()
+                }
+            }
+        },
+        handler: {
+            tandy: {}
+        }
     }
 ];
