@@ -15,7 +15,7 @@ module.exports = class Lists extends Schwifty.Model {
         return Joi.object({
             id: Joi.number().integer(),
             name: Joi.string(),
-            list_id: Joi.number().integer()
+            board_id: Joi.number().integer()
         }); // eslint-disable-line no-undef
     }
 
