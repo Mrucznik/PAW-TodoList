@@ -6,7 +6,7 @@ class Card extends Component {
     render() {
         return(
             <div className="card">
-                <ChangeableText text={this.props.name} />
+                <ChangeableText text={this.props.name} apiURL={"/cards/" + this.props.id}/>
             </div>
         )
     }
@@ -32,8 +32,8 @@ class List extends Component {
     render() {
         return (
             <div className="list">
-                <ChangeableText text={this.props.name} />
-                {this.state.cards.map(card => <Card name={card.name}/>)}
+                <ChangeableText text={this.props.name} apiURL={"/lists/" + this.props.list_id} />
+                {this.state.cards.map(card => <Card name={card.name} id={card.id}/>)}
                 <button className="addCardButton">Add Card</button>
             </div>
         )
@@ -48,7 +48,6 @@ class BoardPage extends Component {
 
     constructor(props){
         super(props);
-        console.log(props);
         this.prepareLists();
     }
 
