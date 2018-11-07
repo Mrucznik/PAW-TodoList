@@ -1,9 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import store from "../store";
 import axios from "axios";
 
 class Card extends Component {
     render() {
-        return(
+        return (
             <div className="card">
                 {this.props.name}
             </div>
@@ -13,10 +15,10 @@ class Card extends Component {
 
 class List extends Component {
     state = {
-        cards : []
+        cards: []
     };
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.prepareCards();
     }
@@ -32,7 +34,7 @@ class List extends Component {
         return (
             <div className="list">
                 {this.props.name}
-                {this.state.cards.map(card => <Card name={card.name}/>)}
+                {this.state.cards.map(card => <Card name={card.name} />)}
                 <button className="addCardButton">Add Card</button>
             </div>
         )
@@ -42,10 +44,11 @@ class List extends Component {
 
 class BoardPage extends Component {
     state = {
-        lists : []
+        lists: [],
+        currUser:[]
     };
 
-    constructor(props){
+    constructor(props) {
         super(props);
         console.log(props);
         this.prepareLists();
@@ -59,14 +62,22 @@ class BoardPage extends Component {
     }
 
     render() {
+        console.log(store.getState().user.token)
         return (
             <div className="board">
                 <div className="row">
-                    {this.state.lists.map(list => <List name={list.name} list_id={list.id}/>)}
+                    {this.state.lists.map(list => <List name={list.name} list_id={list.id} />)}
                 </div>
             </div>
         );
     }
 }
 
-export default BoardPage;
+const mapStateToProps = state => {
+    console.log(state.user)
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, {})(BoardPage)

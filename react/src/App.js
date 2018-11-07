@@ -13,8 +13,8 @@ class App extends Component {
             <Notifications />
             <Router>
                 <div>
-                    <Route path={"/"} component={Login}/>
-                    <Route path={"/boards"} component={BoardsPage} exact/>
+                    <Route path={"/"} component={Login} exact/>
+                    <Route path={"/boards"} component={BoardsPage}/>
                     <Route path={"/board/:id"} component={BoardPage}/>
                 </div>
             </Router>

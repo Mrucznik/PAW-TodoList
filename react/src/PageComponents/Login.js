@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { notify } from "react-notify-toast";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import { setToken } from '../actions/user';
+import store from "../store";
+
 
 class Login extends Component {
   constructor(props) {
@@ -10,8 +14,7 @@ class Login extends Component {
       email: "",
       password: "",
       errors: [],
-      isLogged: false,
-      redirect: false
+      isLogged: false
     };
 
     this.onChange = this.onChange.bind(this);
@@ -45,6 +48,7 @@ class Login extends Component {
         errors.push("invalid email");
       } else {
         this.setState({ errors: [] });
+        setToken("TOKENIK")
         this.setState({ isLogged: true });
         // api.setToken(data)
         //   .then(res => {
@@ -67,10 +71,9 @@ class Login extends Component {
     const { redirect } = this.state;
 
     if (isLogged) {
+      //TODO: Delete dis
+      console.log(store.getState().user.token)
       return <Redirect to="/boards" />;
-    }
-    if (redirect) {
-      return <Redirect to="/" />;
     }
     return (
       <div className="login-main">
@@ -79,7 +82,7 @@ class Login extends Component {
             className="uk-panel uk-panel-box uk-form"
             onSubmit={this.onSubmit}
           >
-            <h1 className name="mytrello">
+            <h1 name="mytrello">
               Log in to MyTrello
             </h1>
             <div>
@@ -88,7 +91,7 @@ class Login extends Component {
             <br/>
             <div>
               <div>
-                <label for="email">Email</label>
+                <label htmlFor="email">Email</label>
                 <input
                   className="login-input-text"
                   name="email"
@@ -100,7 +103,7 @@ class Login extends Component {
                 />
               </div>
               <div>
-                <label for="password">Password</label>
+                <label htmlFor="password">Password</label>
                 <input
                   className="login-input-text"
                   name="password"
@@ -125,4 +128,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(null, { setToken })(Login)
