@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { notify } from "react-notify-toast";
-import { Redirect } from 'react-router-dom'
+import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -23,8 +24,8 @@ class Login extends Component {
   }
 
   onRegisterClick = () => {
-    this.setState({ redirect: true })
-  }
+    this.setState({ redirect: true });
+  };
 
   onSubmit(e) {
     e.preventDefault();
@@ -32,20 +33,19 @@ class Login extends Component {
     const { setToken } = this.props;
     let { errors } = this.state;
     const data = {
-      "auth": {
-        "email": email,
-        "password": password
+      auth: {
+        email: email,
+        password: password
       }
     };
 
-
     if (email && password) {
       if (!this.validateEmail(email)) {
-        notify.show("Invalid email", "error")
-        errors.push("invalid email")
+        notify.show("Invalid email", "error");
+        errors.push("invalid email");
       } else {
-        this.setState({ errors: [] })
-        this.setState({ isLogged: true })
+        this.setState({ errors: [] });
+        this.setState({ isLogged: true });
         // api.setToken(data)
         //   .then(res => {
         //     setToken(res.data["auth_token"])
@@ -67,28 +67,30 @@ class Login extends Component {
     const { redirect } = this.state;
 
     if (isLogged) {
-      return (
-        <Redirect to="/" />
-      )
+      return <Redirect to="/boards" />;
     }
     if (redirect) {
-      return <Redirect to="/login" />;
+      return <Redirect to="/" />;
     }
     return (
       <div className="login-main">
-        <form
-          className="uk-panel uk-panel-box uk-form"
-          onSubmit={this.onSubmit}
-        >
-          <h1 className>
-            Log in to MyTrello
-          </h1>
-          <hr />
-          <div className="">
-            <div className="">
-              <div className="">
+        <div className="login-body">
+          <form
+            className="uk-panel uk-panel-box uk-form"
+            onSubmit={this.onSubmit}
+          >
+            <h1 className name="mytrello">
+              Log in to MyTrello
+            </h1>
+            <div>
+              or <Link to="/">create an account</Link>
+            </div>
+            <br/>
+            <div>
+              <div>
+                <label for="email">Email</label>
                 <input
-                  className=""
+                  className="login-input-text"
                   name="email"
                   type="text"
                   value={email}
@@ -97,9 +99,10 @@ class Login extends Component {
                   placeholder="E-mail"
                 />
               </div>
-              <div className="">
+              <div>
+                <label for="password">Password</label>
                 <input
-                  className=""
+                  className="login-input-text"
                   name="password"
                   type="password"
                   value={password}
@@ -108,33 +111,18 @@ class Login extends Component {
                   placeholder="Password"
                 />
               </div>
-            </div>
-          </div>
-          <hr />
-          <br />
-          <div className="">
-            <div className="">
-              <div className="">
-                <button className="" type="submit">
-                  LOGIN
+              <br />
+              <div className="login-div">
+                <button className="login-button" type="submit">
+                  Log In
                 </button>
               </div>
-              <br /><br />
-              <hr />
-              <div className="">
-                <button className="" onClick={this.onRegisterClick}>
-                  REGISTER
-                </button><br />
-                Are you new here?
-              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     );
   }
 }
 
-
-
-export default Login
+export default Login;
