@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
+import { connect } from 'react-redux';
+import store from "../store";
 
 class Board extends Component {
     render(){
@@ -46,4 +48,10 @@ class BoardsPage extends Component {
     }
 }
 
-export default BoardsPage;
+const mapStateToProps = state => {
+    console.log(state.user)
+    return {
+        user: state.user
+    }
+}
+export default connect(mapStateToProps, {})(BoardsPage)
