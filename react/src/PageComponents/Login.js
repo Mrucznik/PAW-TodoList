@@ -45,22 +45,17 @@ class Login extends Component {
       //   notify.show("Invalid email", "error");
       //   errors.push("invalid email");
       // } else {
-        this.setState({ errors: [] });
-        axios.post("http://localhost:8080/users/login", data).then(res => {
+      this.setState({ errors: [] });
+      axios
+        .post("http://localhost:8080/users/login", data)
+        .then(res => {
           setToken(res.data.token);
           this.setState({ isLogged: true });
-        }).catch(err => {
-          notify.show("invalid password or email", "error");
         })
-
-        // api.setToken(data)
-        //   .then(res => {
-        //     setToken(res.data["auth_token"])
-        //     this.setState({ isLogged: true })
-        //   }).catch(err => {
-        //     notify.show("invalid password or email", "error");
-        //   });
-      // }
+        .catch(err => {
+          notify.show("invalid password or email", "error");
+        });
+      //}
     }
   }
 
