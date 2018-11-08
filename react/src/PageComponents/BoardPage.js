@@ -1,10 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import store from "../store";
 import ChangeableText from './ChangeableText';
 import axios from "axios";
 
 class Card extends Component {
     render() {
-        return(
+        return (
             <div className="card">
                 <ChangeableText text={this.props.name} apiURL={"/cards/" + this.props.id}/>
             </div>
@@ -14,10 +16,10 @@ class Card extends Component {
 
 class List extends Component {
     state = {
-        cards : []
+        cards: []
     };
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.setState({cards: this.props.cards});
     }
@@ -36,10 +38,11 @@ class List extends Component {
 
 class BoardPage extends Component {
     state = {
-        lists : []
+        lists: [],
+        currUser:[]
     };
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.prepareLists();
     }
@@ -52,6 +55,7 @@ class BoardPage extends Component {
     }
 
     render() {
+        console.log(store.getState().user.token)
         return (
             <div className="board">
                 <div className="row">
@@ -62,4 +66,11 @@ class BoardPage extends Component {
     }
 }
 
-export default BoardPage;
+const mapStateToProps = state => {
+    console.log(state.user)
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, {})(BoardPage)
