@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { notify } from "react-notify-toast";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { connect } from 'react-redux';
-import { setToken } from '../actions/user';
+import { connect } from "react-redux";
+import { setToken } from "../actions/user";
 import store from "../store";
-
+import axios from "axios";
 
 class Login extends Component {
   constructor(props) {
@@ -36,20 +36,23 @@ class Login extends Component {
     const { setToken } = this.props;
     let { errors } = this.state;
     const data = {
-      auth: {
-        email: email,
-        password: password
-      }
+      name: email,
+      password: password
     };
 
     if (email && password) {
-      if (!this.validateEmail(email)) {
-        notify.show("Invalid email", "error");
-        errors.push("invalid email");
-      } else {
+      // if (!this.validateEmail(email)) {
+      //   notify.show("Invalid email", "error");
+      //   errors.push("invalid email");
+      // } else {
         this.setState({ errors: [] });
-        setToken("TOKENIK")
-        this.setState({ isLogged: true });
+        axios.post("http://localhost:8080/users/login", data).then(res => {
+          setToken(res.data.token);
+          this.setState({ isLogged: true });
+        }).catch(err => {
+          notify.show("invalid password or email", "error");
+        })
+
         // api.setToken(data)
         //   .then(res => {
         //     setToken(res.data["auth_token"])
@@ -57,7 +60,7 @@ class Login extends Component {
         //   }).catch(err => {
         //     notify.show("invalid password or email", "error");
         //   });
-      }
+      // }
     }
   }
 
@@ -72,7 +75,7 @@ class Login extends Component {
 
     if (isLogged) {
       //TODO: Delete dis
-      console.log(store.getState().user.token)
+      console.log(store.getState().user.token);
       return <Redirect to="/boards" />;
     }
     return (
@@ -82,13 +85,11 @@ class Login extends Component {
             className="uk-panel uk-panel-box uk-form"
             onSubmit={this.onSubmit}
           >
-            <h1 name="mytrello">
-              Log in to MyTrello
-            </h1>
+            <h1 name="mytrello">Log in to MyTrello</h1>
             <div>
               or <Link to="/">create an account</Link>
             </div>
-            <br/>
+            <br />
             <div>
               <div>
                 <label htmlFor="email">Email</label>
@@ -128,4 +129,7 @@ class Login extends Component {
   }
 }
 
-export default connect(null, { setToken })(Login)
+export default connect(
+  null,
+  { setToken }
+)(Login);
