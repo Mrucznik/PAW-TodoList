@@ -10,6 +10,8 @@ class App extends Component {
     render() {
         return (
             <div>
+                <div className="header">
+                </div>
             <Notifications />
             <Router>
                 <div>
