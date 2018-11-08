@@ -19,14 +19,7 @@ class List extends Component {
 
     constructor(props){
         super(props);
-        this.prepareCards();
-    }
-
-    prepareCards() {
-        axios.get('http://localhost:8080/lists/' + this.props.list_id + '/cards').then(res => {
-            const cards = res.data.cards;
-            this.setState({ cards });
-        });
+        this.setState({cards: this.props.cards});
     }
 
     render() {
@@ -52,7 +45,7 @@ class BoardPage extends Component {
     }
 
     async prepareLists() {
-        axios.get('http://localhost:8080/boards/' + this.props.match.params.id + '/lists').then(res => {
+        axios.get('http://localhost:8080/boards/' + this.props.match.params.id + '/lists/cards').then(res => {
             const lists = res.data.lists;
             this.setState({ lists });
         });
@@ -62,7 +55,7 @@ class BoardPage extends Component {
         return (
             <div className="board">
                 <div className="row">
-                    {this.state.lists.map(list => <List name={list.name} list_id={list.id}/>)}
+                    {this.state.lists.map(list => <List name={list.name} cards={list.cards} list_id={list.id}/>)}
                 </div>
             </div>
         );
