@@ -37,15 +37,17 @@ module.exports = [
         path: '/cards/{id}',
         options: {
             description: 'Modify a card',
-            notes: 'Modify name of a card',
+            notes: 'Modify name, description or position of a card',
             tags: ['api'],
             validate: {
                 params: {
                     id: Joi.number().required()
                 },
-                payload: {
-                    name: Joi.string().required()
-                }
+                payload: Joi.object().keys(({
+                    name: Joi.string().optional(),
+                    description: Joi.string().optional(),
+                    position: Joi.number().integer().optional()
+                })).min(1)
             }
         },
         handler: {
