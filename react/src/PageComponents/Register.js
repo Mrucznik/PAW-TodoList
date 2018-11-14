@@ -7,10 +7,11 @@ import { setToken } from "../actions/user";
 import store from "../store";
 import axios from "axios";
 
-class Login extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userName: "",
       email: "",
       password: "",
       errors: [],
@@ -32,30 +33,33 @@ class Login extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const { email, password } = this.state;
+    const { userName, email, password } = this.state;
     const { setToken } = this.props;
     let { errors } = this.state;
     const data = {
-      name: email,
+      name: userName,
       password: password
     };
 
-    if (email && password) {
-      // if (!this.validateEmail(email)) {
-      //   notify.show("Invalid email", "error");
-      //   errors.push("invalid email");
-      // } else {
-      this.setState({ errors: [] });
-      axios
-        .post("http://localhost:8080/users/login", data)
-        .then(res => {
-          setToken(res.data.token);
-          this.setState({ isLogged: true });
-        })
-        .catch(err => {
-          notify.show("invalid password or email", "error");
-        });
-      //}
+    if (email && password && userName) {
+      if (!this.validateEmail(email)) {
+        notify.show("Invalid email", "error");
+        errors.push("invalid email");
+      } else if (this.password < 8) {
+        notify.show("Password to short!", "error");
+        errors.push("invalid password");
+      } else {
+        this.setState({ errors: [] });
+        axios
+          .post("http://localhost:8080/users/register", data)
+          .then(res => {
+            setToken(res.data.token);
+            this.setState({ isLogged: true });
+          })
+          .catch(err => {
+            notify.show("invalid password or email", "error");
+          });
+      }
     }
   }
 
@@ -65,11 +69,9 @@ class Login extends Component {
   }
 
   render() {
-    const { email, password, isLogged } = this.state;
+    const { userName, email, password, isLogged } = this.state;
 
     if (isLogged) {
-      //TODO: Delete dis
-      console.log(store.getState().user.token);
       return <Redirect to="/boards" />;
     }
     return (
@@ -79,14 +81,26 @@ class Login extends Component {
             className="uk-panel uk-panel-box uk-form"
             onSubmit={this.onSubmit}
           >
-            <h1 name="mytrello">Log in to MyTrello</h1>
+            <h1 name="mytrello">Create a MyTrello Account</h1>
             <div>
-              or <Link to="/register">create an account</Link>
+              or <Link to="/">sign in to your account</Link>
             </div>
             <br />
             <div>
               <div>
-                <label htmlFor="email">Email</label>
+                <label htmlFor="userName">Name</label>
+                <input
+                  className="login-input-text"
+                  name="userName"
+                  type="text"
+                  value={userName}
+                  required={true}
+                  onChange={e => this.onChange(e)}
+                  placeholder="Name"
+                />
+              </div>
+              <div>
+                <label htmlFor="email">E-mail</label>
                 <input
                   className="login-input-text"
                   name="email"
@@ -111,8 +125,8 @@ class Login extends Component {
               </div>
               <br />
               <div className="login-div">
-                <button className="login-button" type="submit">
-                  Log In
+                <button className="register-button" type="submit">
+                  Register
                 </button>
               </div>
             </div>
@@ -126,4 +140,4 @@ class Login extends Component {
 export default connect(
   null,
   { setToken }
-)(Login);
+)(Register);

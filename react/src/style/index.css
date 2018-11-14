@@ -1,5 +1,6 @@
 @import './BoardPage.css';
 @import './Login.css';
+@import './Register.css';
 
 body {
   margin: 0;
