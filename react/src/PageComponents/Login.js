@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setToken } from "../actions/user";
 import store from "../store";
-import axios from "axios";
+import api from "../api";
 
 class Login extends Component {
   constructor(props) {
@@ -46,8 +46,7 @@ class Login extends Component {
       //   errors.push("invalid email");
       // } else {
       this.setState({ errors: [] });
-      axios
-        .post("http://localhost:8080/users/login", data)
+      api.setToken(data)
         .then(res => {
           setToken(res.data.token);
           this.setState({ isLogged: true });

@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setToken } from "../actions/user";
 import store from "../store";
-import axios from "axios";
-
+import api from "../api";
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -35,32 +34,38 @@ class Register extends Component {
     e.preventDefault();
     const { userName, email, password } = this.state;
     const { setToken } = this.props;
-    let { errors } = this.state;
     const data = {
-      name: userName,
-      password: password
+      "name": userName,
+      "password": password
     };
 
-    if (email && password && userName) {
-      if (!this.validateEmail(email)) {
-        notify.show("Invalid email", "error");
-        errors.push("invalid email");
-      } else if (this.password < 8) {
-        notify.show("Password to short!", "error");
-        errors.push("invalid password");
-      } else {
-        this.setState({ errors: [] });
-        axios
-          .post("http://localhost:8080/users/register", data)
+    if(this.validateForm()){
+      api.createUser(data)
           .then(res => {
             setToken(res.data.token);
-            this.setState({ isLogged: true });
+            this.setState({ isLogged: true })
           })
-          .catch(err => {
-            notify.show("invalid password or email", "error");
-          });
-      }
+          .catch(err => notify.show("Something went wrong...",'error'))
     }
+  }
+  
+
+  validateForm(){
+    const { userName, email, password } = this.state;
+
+    if (!this.validateEmail(email)) {
+      notify.show("Invalid email", "error");
+      return false;
+    }
+    if (password < 8) {
+      notify.show("Password to short!", "error");
+      return false;
+    }
+    if (userName === null){
+      notify.show("Empty name!", "error");
+      return false;
+    }
+    return true;
   }
 
   validateEmail(email) {
