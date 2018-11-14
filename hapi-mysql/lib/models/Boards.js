@@ -14,13 +14,22 @@ module.exports = class Boards extends Schwifty.Model {
 
         return Joi.object({
             id: Joi.number().integer(),
-            name: Joi.string()
+            name: Joi.string(),
+            user_id: Joi.number().integer()
         }); // eslint-disable-line no-undef
     }
 
     static get relationMappings() {
 
         return {
+            users: {
+                relation: Schwifty.Model.BelongsToOneRelation,
+                modelClass: require('./Users'),
+                join: {
+                    from: 'users.id',
+                    to: 'boards.user_id'
+                }
+            },
             lists: {
                 relation: Schwifty.Model.HasManyRelation,
                 modelClass: require('./Lists'),

@@ -1,17 +1,23 @@
 'use strict';
 
+const SecurePassword = require('secure-password');
+
+const pwd = SecurePassword();
+
 exports.up = function (knex, Promise) {
     return Promise.all([
         knex.schema.createTable('users', (table) => {
             table.increments('id').primary();
             table.varchar('name', 128).unique().notNullable();
             table.binary('password').notNullable();
-        }).then(() => {
+        }).then(async () => {
             return knex('users').insert([
-                { name: 'Mrucznik', password: '1234' },
-                { name: 'Rafikus', password: '4321' },
-                { name: 'Berendhard', password: '1212' }
+                { name: 'Mrucznik', password: await pwd.hash(Buffer.from('1234')) },
+                { name: 'Rafikus', password: await pwd.hash(Buffer.from('kek')) },
+                { name: 'Berendhard', password: await pwd.hash(Buffer.from('admin')) }
             ]);
+        }).catch(() => {
+            exports.down(knex, Promise);
         })
     ]);
 };

@@ -18,4 +18,18 @@ module.exports = class Users extends Schwifty.Model {
             password: Joi.binary(),
         }); // eslint-disable-line no-undef
     }
+
+    static get relationMappings() {
+
+        return {
+            boards: {
+                relation: Schwifty.Model.HasManyRelation,
+                modelClass: require('./Boards'),
+                join: {
+                    from: 'users.id',
+                    to: 'boards.user_id'
+                }
+            }
+        };
+    }
 };
