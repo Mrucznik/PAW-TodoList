@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import store from "../store";
 import ChangeableText from './ChangeableText';
 import axios from "axios";
+import api from "../api";
 
 class Card extends Component {
     render() {
@@ -48,7 +49,7 @@ class BoardPage extends Component {
     }
 
     async prepareLists() {
-        axios.get('http://localhost:8080/boards/' + this.props.match.params.id + '/lists/cards').then(res => {
+        api.getSingleBoard(this.props.match.params.id).then(res => {
             const lists = res.data.lists;
             this.setState({ lists });
         });

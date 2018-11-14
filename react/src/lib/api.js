@@ -24,6 +24,16 @@ class Api {
     this.setHeaders();
     return this.api.post('users/register', params);
   }
+
+  getBoards(){
+    this.setHeaders();
+    return this.api.get('boards');
+  }
+
+  getSingleBoard(id){
+    this.setHeaders();
+    return this.api.get('boards/' + id +"/lists/cards");
+  }
 }
 
 export default Api;

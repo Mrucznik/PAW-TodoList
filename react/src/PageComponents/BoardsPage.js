@@ -4,6 +4,7 @@ import ChangeableText from './ChangeableText';
 import axios from "axios";
 import { connect } from 'react-redux';
 import store from "../store";
+import api from "../api";
 
 class Board extends Component {
     render(){
@@ -31,7 +32,7 @@ class BoardsPage extends Component {
     }
 
     prepareBoards() {
-        axios.get('http://localhost:8080/boards').then(res => {
+        api.getBoards().then(res => {
             const boards = res.data;
             this.setState({ boards });
         });
