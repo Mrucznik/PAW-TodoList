@@ -15,6 +15,7 @@ module.exports = class Boards extends Schwifty.Model {
         return Joi.object({
             id: Joi.number().integer(),
             name: Joi.string(),
+            locked: Joi.boolean(),
             user_id: Joi.number().integer()
         }); // eslint-disable-line no-undef
     }

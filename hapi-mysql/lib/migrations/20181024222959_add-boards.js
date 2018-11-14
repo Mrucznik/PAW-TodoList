@@ -5,6 +5,7 @@ exports.up = function (knex, Promise) {
         knex.schema.createTable('boards', (table) => {
             table.increments('id').primary();
             table.text('name').notNullable();
+            table.boolean('locked').defaultTo(false);
             table.integer('user_id').notNullable();
             table.index('user_id');
         }).then(() => {
