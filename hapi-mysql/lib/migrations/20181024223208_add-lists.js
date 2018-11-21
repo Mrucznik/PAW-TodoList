@@ -15,8 +15,6 @@ exports.up = function (knex, Promise) {
                 { name: 'Testowa lista nr 2 dla 2 boarda', board_id: 2 },
                 { name: 'Testowa lista dla 3 boarda', board_id: 3 }
             ]);
-        }).catch(() => {
-            exports.down(knex, Promise);
         })
     ]);
 };

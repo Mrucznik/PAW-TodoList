@@ -16,8 +16,6 @@ exports.up = function (knex, Promise) {
                 { name: 'Rafikus', password: await pwd.hash(Buffer.from('kek')) },
                 { name: 'Berendhard', password: await pwd.hash(Buffer.from('admin')) }
             ]);
-        }).catch(() => {
-            exports.down(knex, Promise);
         })
     ]);
 };

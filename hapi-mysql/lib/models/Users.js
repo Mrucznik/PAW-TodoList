@@ -29,6 +29,14 @@ module.exports = class Users extends Schwifty.Model {
                     from: 'users.id',
                     to: 'boards.user_id'
                 }
+            },
+            comments: {
+                relation: Schwifty.Model.HasManyRelation,
+                modelClass: require('./Comments'),
+                join: {
+                    from: 'users.id',
+                    to: 'comments.user_id'
+                }
             }
         };
     }

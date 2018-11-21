@@ -21,8 +21,6 @@ exports.up = function (knex, Promise) {
                 { name: 'Testowa karta', description: 'testowy opis', position: 1, list_id: 4 },
                 { name: 'Usunąć to', description: 'i to też', position: 1, list_id: 5 }
             ]);
-        }).catch(() => {
-            exports.down(knex, Promise);
         })
     ]);
 };

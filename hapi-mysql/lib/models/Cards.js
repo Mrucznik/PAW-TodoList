@@ -31,6 +31,14 @@ module.exports = class Cards extends Schwifty.Model {
                     from: 'lists.id',
                     to: 'cards.list_id'
                 }
+            },
+            comments: {
+                relation: Schwifty.Model.HasManyRelation,
+                modelClass: require('./Comments'),
+                join: {
+                    from: 'cards.id',
+                    to: 'comments.card_id'
+                }
             }
         };
     }
