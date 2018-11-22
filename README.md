@@ -1,4 +1,4 @@
-# PAW-TodoList
+# PAW-TodoList [![Build Status](https://travis-ci.org/Mrucznik/PAW-TodoList.svg?branch=master)](https://travis-ci.org/Mrucznik/PAW-TodoList)
 
 This is trello-like application to manage your tasks and create todo-lists.
 

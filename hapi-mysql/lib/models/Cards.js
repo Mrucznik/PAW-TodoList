@@ -15,6 +15,8 @@ module.exports = class Cards extends Schwifty.Model {
         return Joi.object({
             id: Joi.number().integer(),
             name: Joi.string(),
+            description: Joi.string(),
+            position: Joi.number().integer(),
             list_id: Joi.number().integer()
         }); // eslint-disable-line no-undef
     }
@@ -28,6 +30,14 @@ module.exports = class Cards extends Schwifty.Model {
                 join: {
                     from: 'lists.id',
                     to: 'cards.list_id'
+                }
+            },
+            comments: {
+                relation: Schwifty.Model.HasManyRelation,
+                modelClass: require('./Comments'),
+                join: {
+                    from: 'cards.id',
+                    to: 'comments.card_id'
                 }
             }
         };

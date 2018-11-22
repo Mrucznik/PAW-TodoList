@@ -61,7 +61,8 @@ module.exports = [
             tags: ['api'],
             validate: {
                 payload: {
-                    name: Joi.string().required()
+                    name: Joi.string().required(),
+                    locked: Joi.boolean().optional()
                 }
             }
         },
@@ -100,9 +101,10 @@ module.exports = [
                 params: {
                     id: Joi.number().required()
                 },
-                payload: {
-                    name: Joi.string().required()
-                }
+                payload: Joi.object().keys(({
+                    name: Joi.string().optional(),
+                    locked: Joi.boolean().optional()
+                })).min(1)
             }
         },
         handler: {

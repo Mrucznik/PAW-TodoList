@@ -61,7 +61,9 @@ module.exports = [
                     id: Joi.number().required()
                 },
                 payload: {
-                    name: Joi.string().required()
+                    name: Joi.string().required(),
+                    description: Joi.string().optional(),
+                    position: Joi.number().integer().required()
                 }
             }
         },
