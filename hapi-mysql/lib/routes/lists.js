@@ -10,6 +10,7 @@ module.exports = [
             description: 'Get all lists',
             notes: 'Returns all lists',
             tags: ['api'],
+            auth: 'jwt',
             handler: {
                 tandy: {}
             }
@@ -22,6 +23,7 @@ module.exports = [
             description: 'Get list',
             notes: 'Returns a list by the id passed in path',
             tags: ['api'],
+            auth: 'jwt',
             validate: {
                 params: {
                     id: Joi.number()
@@ -39,6 +41,7 @@ module.exports = [
             description: 'Get list cards',
             notes: 'Returns all cards in list with id passed in path',
             tags: ['api'],
+            auth: 'jwt',
             validate: {
                 params: {
                     id: Joi.number()
@@ -56,6 +59,7 @@ module.exports = [
             description: 'Create new card in list',
             notes: 'Create new card associated with list of secified id',
             tags: ['api'],
+            auth: 'jwt',
             validate: {
                 params: {
                     id: Joi.number().required()
@@ -78,6 +82,7 @@ module.exports = [
             description: 'Modify a list',
             notes: 'Modify name of a list',
             tags: ['api'],
+            auth: 'jwt',
             validate: {
                 params: {
                     id: Joi.number().required()

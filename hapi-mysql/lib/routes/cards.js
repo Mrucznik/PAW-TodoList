@@ -10,6 +10,7 @@ module.exports = [
             description: 'Get all cards',
             notes: 'Returns all cards',
             tags: ['api'],
+            auth: 'jwt',
             handler: {
                 tandy: {}
             }
@@ -22,6 +23,7 @@ module.exports = [
             description: 'Get card',
             notes: 'Returns a card by the id passed in path',
             tags: ['api'],
+            auth: 'jwt',
             validate: {
                 params: {
                     id: Joi.number()
@@ -39,6 +41,7 @@ module.exports = [
             description: 'Modify a card',
             notes: 'Modify name, description or position of a card',
             tags: ['api'],
+            auth: 'jwt',
             validate: {
                 params: {
                     id: Joi.number().required()

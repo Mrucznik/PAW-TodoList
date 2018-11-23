@@ -10,6 +10,7 @@ module.exports = [
             description: 'Get boards',
             notes: 'Returns all boards',
             tags: ['api'],
+            auth: 'jwt',
             handler: {
                 tandy: {}
             }
@@ -22,6 +23,7 @@ module.exports = [
             description: 'Get board lists',
             notes: 'Returns all list in board with id passed in path',
             tags: ['api'],
+            auth: 'jwt',
             validate: {
                 params: {
                     id: Joi.number()
@@ -39,6 +41,7 @@ module.exports = [
             description: 'Get board lists and cards',
             notes: 'Returns a board with lists containing cards',
             tags: ['api'],
+            auth: 'jwt',
             validate: {
                 params: {
                     id: Joi.number()
@@ -47,7 +50,6 @@ module.exports = [
             handler: async (request) => {
 
                 const { Boards } = request.models();
-                const { Lists } = request.models();
 
                 return await Boards.query().findById(request.params.id).eager('lists.[cards]');
             }
@@ -59,6 +61,7 @@ module.exports = [
         options: {
             description: 'Create new board',
             tags: ['api'],
+            auth: 'jwt',
             validate: {
                 payload: {
                     name: Joi.string().required(),
@@ -77,6 +80,7 @@ module.exports = [
             description: 'Create new list in board',
             notes: 'Create new list associated with board of secified id',
             tags: ['api'],
+            auth: 'jwt',
             validate: {
                 params: {
                     id: Joi.number().required()
@@ -97,6 +101,7 @@ module.exports = [
             description: 'Modify a board',
             notes: 'Modify name of a board',
             tags: ['api'],
+            auth: 'jwt',
             validate: {
                 params: {
                     id: Joi.number().required()
