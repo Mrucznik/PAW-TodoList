@@ -46,5 +46,23 @@ module.exports = [
 
             return await Comments.query().insertAndFetch({ message: comment.message, user_id: user.id, card_id: request.params.id });
         }
+    },
+    {
+        method: 'DELETE',
+        path: '/comments/{id}',
+        options: {
+            description: 'Delete a card comment',
+            notes: 'Delete comment of specified.',
+            tags: ['api'],
+            auth: 'jwt',
+            validate: {
+                params: {
+                    id: Joi.number().required()
+                }
+            }
+        },
+        handler: {
+            tandy: {}
+        }
     }
 ];
