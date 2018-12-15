@@ -49,7 +49,8 @@ module.exports = [
                 payload: Joi.object().keys(({
                     name: Joi.string().optional(),
                     description: Joi.string().optional(),
-                    position: Joi.number().integer().optional()
+                    position: Joi.number().integer().optional(),
+                    archived: Joi.boolean()
                 })).min(1)
             }
         },

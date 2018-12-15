@@ -17,7 +17,8 @@ module.exports = class Cards extends Schwifty.Model {
             name: Joi.string(),
             description: Joi.string(),
             position: Joi.number().integer(),
-            list_id: Joi.number().integer()
+            list_id: Joi.number().integer(),
+            archived: Joi.boolean()
         }); // eslint-disable-line no-undef
     }
 
