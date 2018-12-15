@@ -50,7 +50,7 @@ module.exports = [
                     name: Joi.string().optional(),
                     description: Joi.string().optional(),
                     position: Joi.number().integer().optional(),
-                    archived: Joi.boolean()
+                    archived: Joi.boolean().optional()
                 })).min(1)
             }
         },

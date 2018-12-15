@@ -40,6 +40,14 @@ module.exports = class Cards extends Schwifty.Model {
                     from: 'cards.id',
                     to: 'comments.card_id'
                 }
+            },
+            tasklists: {
+                relation: Schwifty.Model.HasManyRelation,
+                modelClass: require('./Tasklists'),
+                join: {
+                    from: 'cards.id',
+                    to: 'tasklists.card_id'
+                }
             }
         };
     }
