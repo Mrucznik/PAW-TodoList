@@ -18,24 +18,6 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/boards/{id}/lists',
-        options: {
-            description: 'Get board lists',
-            notes: 'Returns all list in board with id passed in path',
-            tags: ['api'],
-            auth: 'jwt',
-            validate: {
-                params: {
-                    id: Joi.number()
-                }
-            },
-            handler: {
-                tandy: {}
-            }
-        }
-    },
-    {
-        method: 'GET',
         path: '/boards/{id}/lists/cards',
         options: {
             description: 'Get board lists and cards',
@@ -66,27 +48,6 @@ module.exports = [
                 payload: {
                     name: Joi.string().required(),
                     locked: Joi.boolean().optional()
-                }
-            }
-        },
-        handler: {
-            tandy: {}
-        }
-    },
-    {
-        method: 'POST',
-        path: '/boards/{id}/lists',
-        options: {
-            description: 'Create new list in board',
-            notes: 'Create new list associated with board of secified id',
-            tags: ['api'],
-            auth: 'jwt',
-            validate: {
-                params: {
-                    id: Joi.number().required()
-                },
-                payload: {
-                    name: Joi.string().required()
                 }
             }
         },

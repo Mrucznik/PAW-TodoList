@@ -60,28 +60,28 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/cards/{id}/comments',
+        path: '/lists/{id}/cards',
         options: {
-            description: 'Get a card comment',
-            notes: 'Get comment from card of specified id.',
+            description: 'Get list cards',
+            notes: 'Returns all cards in list with id passed in path',
             tags: ['api'],
             auth: 'jwt',
             validate: {
                 params: {
-                    id: Joi.number().required()
+                    id: Joi.number()
                 }
+            },
+            handler: {
+                tandy: {}
             }
-        },
-        handler: {
-            tandy: {}
         }
     },
     {
         method: 'POST',
-        path: '/cards/{id}/comments',
+        path: '/lists/{id}/cards',
         options: {
-            description: 'Create a card comment',
-            notes: 'Adds comment to card of specified id.',
+            description: 'Create new card in list',
+            notes: 'Create new card associated with list of secified id',
             tags: ['api'],
             auth: 'jwt',
             validate: {
@@ -89,17 +89,14 @@ module.exports = [
                     id: Joi.number().required()
                 },
                 payload: {
-                    message: Joi.string().required()
+                    name: Joi.string().required(),
+                    description: Joi.string().optional(),
+                    position: Joi.number().integer().required()
                 }
             }
         },
-        handler: async (request) => {
-
-            const { credentials: user } = request.auth;
-            const { Comments } = request.models();
-            const comment = request.payload;
-
-            return await Comments.query().insertAndFetch({ message: comment.message, user_id: user.id, card_id: request.params.id });
+        handler: {
+            tandy: {}
         }
     }
 ];

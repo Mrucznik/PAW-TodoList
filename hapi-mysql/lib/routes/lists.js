@@ -35,11 +35,32 @@ module.exports = [
         }
     },
     {
-        method: 'GET',
-        path: '/lists/{id}/cards',
+        method: 'PATCH',
+        path: '/lists/{id}',
         options: {
-            description: 'Get list cards',
-            notes: 'Returns all cards in list with id passed in path',
+            description: 'Modify a list',
+            notes: 'Modify name of a list',
+            tags: ['api'],
+            auth: 'jwt',
+            validate: {
+                params: {
+                    id: Joi.number().required()
+                },
+                payload: {
+                    name: Joi.string().required()
+                }
+            }
+        },
+        handler: {
+            tandy: {}
+        }
+    },
+    {
+        method: 'GET',
+        path: '/boards/{id}/lists',
+        options: {
+            description: 'Get board lists',
+            notes: 'Returns all list in board with id passed in path',
             tags: ['api'],
             auth: 'jwt',
             validate: {
@@ -54,33 +75,10 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/lists/{id}/cards',
+        path: '/boards/{id}/lists',
         options: {
-            description: 'Create new card in list',
-            notes: 'Create new card associated with list of secified id',
-            tags: ['api'],
-            auth: 'jwt',
-            validate: {
-                params: {
-                    id: Joi.number().required()
-                },
-                payload: {
-                    name: Joi.string().required(),
-                    description: Joi.string().optional(),
-                    position: Joi.number().integer().required()
-                }
-            }
-        },
-        handler: {
-            tandy: {}
-        }
-    },
-    {
-        method: 'PATCH',
-        path: '/lists/{id}',
-        options: {
-            description: 'Modify a list',
-            notes: 'Modify name of a list',
+            description: 'Create new list in board',
+            notes: 'Create new list associated with board of secified id',
             tags: ['api'],
             auth: 'jwt',
             validate: {
