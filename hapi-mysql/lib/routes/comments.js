@@ -52,12 +52,30 @@ module.exports = [
         path: '/comments/{id}',
         options: {
             description: 'Delete a card comment',
-            notes: 'Delete comment of specified.',
+            notes: 'Delete comment of specified id.',
             tags: ['api'],
             auth: 'jwt',
             validate: {
                 params: {
                     id: Joi.number().required()
+                }
+            }
+        },
+        handler: {
+            tandy: {}
+        }
+    },
+    {
+        method: 'PATCH',
+        path: '/comments/{id}',
+        options: {
+            description: 'Modify comment',
+            notes: 'Modify a comment of specified id.',
+            tags: ['api'],
+            auth: 'jwt',
+            validate: {
+                params: {
+                    message: Joi.string().required()
                 }
             }
         },
