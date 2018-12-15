@@ -50,6 +50,7 @@ module.exports = [
                     name: Joi.string().optional(),
                     description: Joi.string().optional(),
                     position: Joi.number().integer().optional(),
+                    deadline: Joi.date().iso().optional(),
                     archived: Joi.boolean().optional()
                 })).min(1)
             }
@@ -91,7 +92,8 @@ module.exports = [
                 payload: {
                     name: Joi.string().required(),
                     description: Joi.string().optional(),
-                    position: Joi.number().integer().required()
+                    position: Joi.number().integer().required(),
+                    deadline: Joi.date().iso().optional()
                 }
             }
         },
@@ -116,9 +118,9 @@ module.exports = [
 
                 const { Cards } = request.models();
 
-                return await Cards.query().insert((builder) => {
+                return await Cards.query().insertAndFetch((builder) => {
                     builder.findById(request.params.id);
-                }).returning('*');
+                });
             }
         }
     }
