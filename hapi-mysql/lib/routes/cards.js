@@ -118,7 +118,7 @@ module.exports = [
 
                 const { Cards } = request.models();
 
-                return await Cards.query().insertAndFetch((builder) => {
+                return await Cards.query().throwIfNotFound().insertAndFetch((builder) => {
                     builder.findById(request.params.id);
                 });
             }

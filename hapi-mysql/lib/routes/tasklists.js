@@ -15,7 +15,7 @@ module.exports = [
 
                 const { Tasklists } = request.models();
 
-                return await Tasklists.query().findById(request.params.id).eager('tasklists.[tasklist-items]');
+                return await Tasklists.query().throwIfNotFound().findById(request.params.id).eager('tasklists.[tasklist-items]');
             }
         }
     },
