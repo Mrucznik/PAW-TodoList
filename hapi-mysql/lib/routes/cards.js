@@ -98,5 +98,28 @@ module.exports = [
         handler: {
             tandy: {}
         }
+    },
+    {
+        method: 'POST',
+        path: '/cards/{id}/copy',
+        options: {
+            description: 'Copy card',
+            notes: 'Create and return copy of a card',
+            tags: ['api'],
+            auth: 'jwt',
+            validate: {
+                params: {
+                    id: Joi.number()
+                }
+            },
+            handler: async (request) => {
+
+                const { Cards } = request.models();
+
+                return await Cards.query().insert((builder) => {
+                    builder.findById(request.params.id);
+                }).returning('*');
+            }
+        }
     }
 ];
