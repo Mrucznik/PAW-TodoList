@@ -3,7 +3,7 @@
 const Schwifty = require('schwifty');
 const Joi = require('joi');
 
-module.exports = class Cards extends Schwifty.Model {
+module.exports = class Tasklists extends Schwifty.Model {
 
     static get tableName() {
 
@@ -36,7 +36,7 @@ module.exports = class Cards extends Schwifty.Model {
                 modelClass: require('./TasklistItems'),
                 join: {
                     from: 'tasklists.id',
-                    to: 'tasklists-items.tasklist_id'
+                    to: 'tasklist-items.tasklist_id'
                 }
             }
         };
