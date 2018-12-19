@@ -11,8 +11,8 @@ Dotenv.config({ path: `${__dirname}/.env` });
 // Glue manifest as a confidence store
 module.exports = new Confidence.Store({
     server: {
-        host: '0.0.0.0',
-        port: process.env.PORT || 3000,
+        host: process.env.HOST || '0.0.0.0',
+        port: process.env.PORT || 8080,
         debug: {
             $filter: 'NODE_ENV',
             development: {
