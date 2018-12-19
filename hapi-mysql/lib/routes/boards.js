@@ -33,7 +33,7 @@ module.exports = [
 
                 const { Boards } = request.models();
 
-                return await Boards.query().throwIfNotFound().findById(request.params.id).eager('lists.[cards]');
+                return await Boards.query().throwIfNotFound().findById(request.params.id).eager('lists.[cards(orderByPosition)]');
             }
         }
     },

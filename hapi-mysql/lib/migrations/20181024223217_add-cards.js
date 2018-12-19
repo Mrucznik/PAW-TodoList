@@ -16,8 +16,8 @@ exports.up = function (knex, Promise) {
         }).then(() => {
             return knex(tableName).insert([
                 { name: 'Wskrzesić Akwarelistę', description: 'Dla jednych kontrowersyjne, dla drugich oczywiste.', position: 1, list_id: 1 },
-                { name: 'Namalować obraz', description: 'Akwarelami', position: 2, list_id: 1 },
-                { name: 'Obronić wschodnią flankę', description: 'Czołgami', position: 3, list_id: 1 },
+                { name: 'Namalować obraz', description: 'Akwarelami', position: 3, list_id: 1 },
+                { name: 'Obronić wschodnią flankę', description: 'Czołgami', position: 2, list_id: 1 },
                 { name: 'Zaprogramować niezaprogroamowane', description: 'Naprawić zaprogramowane', position: 1, list_id: 2 },
                 { name: 'Zaliczyć projekt', description: 'I nie tylko', position: 2, list_id: 2 },
                 { name: 'Napić się piwa', description: 'I wódki', position: 1, list_id: 3 },

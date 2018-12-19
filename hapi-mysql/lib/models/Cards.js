@@ -52,4 +52,12 @@ module.exports = class Cards extends Schwifty.Model {
             }
         };
     }
+
+    static get modifiers() {
+        return {
+            orderByPosition: (builder) => {
+                builder.orderBy('position');
+            }
+        };
+    }
 };
