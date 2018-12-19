@@ -35,7 +35,7 @@ module.exports = [
                 const { credentials: user } = request.auth;
                 const { Boards } = request.models();
 
-                return await Boards.query().where('user_id', user.id);
+                return await Boards.query().throwIfNotFound().where('user_id', user.id);
             }
         }
     }

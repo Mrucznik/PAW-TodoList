@@ -14,7 +14,7 @@
     - npx knex migrate:latest
  - You need to install and start npm project
     - npm install
-    - npm start
+    - npm start (In case problems with migrations - run npm start as administrator)
  - ???
  - Profit
  

@@ -10,23 +10,7 @@ module.exports = [
             description: 'Get boards',
             notes: 'Returns all boards',
             tags: ['api'],
-            handler: {
-                tandy: {}
-            }
-        }
-    },
-    {
-        method: 'GET',
-        path: '/boards/{id}/lists',
-        options: {
-            description: 'Get board lists',
-            notes: 'Returns all list in board with id passed in path',
-            tags: ['api'],
-            validate: {
-                params: {
-                    id: Joi.number()
-                }
-            },
+            auth: 'jwt',
             handler: {
                 tandy: {}
             }
@@ -39,6 +23,7 @@ module.exports = [
             description: 'Get board lists and cards',
             notes: 'Returns a board with lists containing cards',
             tags: ['api'],
+            auth: 'jwt',
             validate: {
                 params: {
                     id: Joi.number()
@@ -47,9 +32,8 @@ module.exports = [
             handler: async (request) => {
 
                 const { Boards } = request.models();
-                const { Lists } = request.models();
 
-                return await Boards.query().findById(request.params.id).eager('lists.[cards]');
+                return await Boards.query().throwIfNotFound().findById(request.params.id).eager('lists.[cards(orderByPosition)]');
             }
         }
     },
@@ -59,30 +43,11 @@ module.exports = [
         options: {
             description: 'Create new board',
             tags: ['api'],
+            auth: 'jwt',
             validate: {
                 payload: {
                     name: Joi.string().required(),
                     locked: Joi.boolean().optional()
-                }
-            }
-        },
-        handler: {
-            tandy: {}
-        }
-    },
-    {
-        method: 'POST',
-        path: '/boards/{id}/lists',
-        options: {
-            description: 'Create new list in board',
-            notes: 'Create new list associated with board of secified id',
-            tags: ['api'],
-            validate: {
-                params: {
-                    id: Joi.number().required()
-                },
-                payload: {
-                    name: Joi.string().required()
                 }
             }
         },
@@ -97,6 +62,7 @@ module.exports = [
             description: 'Modify a board',
             notes: 'Modify name of a board',
             tags: ['api'],
+            auth: 'jwt',
             validate: {
                 params: {
                     id: Joi.number().required()
