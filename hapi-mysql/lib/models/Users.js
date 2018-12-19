@@ -37,6 +37,14 @@ module.exports = class Users extends Schwifty.Model {
                     from: 'users.id',
                     to: 'comments.user_id'
                 }
+            },
+            'history-users': {
+                relation: Schwifty.Model.HasManyRelation,
+                modelClass: require('./History'),
+                join: {
+                    from: 'users.id',
+                    to: 'history.user_id'
+                }
             }
         };
     }

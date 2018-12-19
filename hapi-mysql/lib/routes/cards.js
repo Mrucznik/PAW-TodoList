@@ -10,6 +10,7 @@ module.exports = [
             description: 'Get all cards',
             notes: 'Returns all cards',
             tags: ['api'],
+            auth: 'jwt',
             handler: {
                 tandy: {}
             }
@@ -22,6 +23,7 @@ module.exports = [
             description: 'Get card',
             notes: 'Returns a card by the id passed in path',
             tags: ['api'],
+            auth: 'jwt',
             validate: {
                 params: {
                     id: Joi.number()
@@ -39,6 +41,7 @@ module.exports = [
             description: 'Modify a card',
             notes: 'Modify name, description or position of a card',
             tags: ['api'],
+            auth: 'jwt',
             validate: {
                 params: {
                     id: Joi.number().required()
@@ -46,7 +49,9 @@ module.exports = [
                 payload: Joi.object().keys(({
                     name: Joi.string().optional(),
                     description: Joi.string().optional(),
-                    position: Joi.number().integer().optional()
+                    position: Joi.number().integer().optional(),
+                    deadline: Joi.date().iso().optional(),
+                    archived: Joi.boolean().optional()
                 })).min(1)
             }
         },
@@ -56,15 +61,39 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/cards/{id}/comments',
+        path: '/lists/{id}/cards',
         options: {
-            description: 'Get a card comment',
-            notes: 'Get comment from card of specified id.',
+            description: 'Get list cards',
+            notes: 'Returns all cards in list with id passed in path',
+            tags: ['api'],
+            auth: 'jwt',
+            validate: {
+                params: {
+                    id: Joi.number()
+                }
+            },
+            handler: {
+                tandy: {}
+            }
+        }
+    },
+    {
+        method: 'POST',
+        path: '/lists/{id}/cards',
+        options: {
+            description: 'Create new card in list',
+            notes: 'Create new card associated with list of secified id',
             tags: ['api'],
             auth: 'jwt',
             validate: {
                 params: {
                     id: Joi.number().required()
+                },
+                payload: {
+                    name: Joi.string().required(),
+                    description: Joi.string().optional(),
+                    position: Joi.number().integer().required(),
+                    deadline: Joi.date().iso().optional()
                 }
             }
         },
@@ -74,28 +103,25 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/cards/{id}/comments',
+        path: '/cards/{id}/copy',
         options: {
-            description: 'Create a card comment',
-            notes: 'Adds comment to card of specified id.',
+            description: 'Copy card',
+            notes: 'Create and return copy of a card',
             tags: ['api'],
             auth: 'jwt',
             validate: {
                 params: {
-                    id: Joi.number().required()
-                },
-                payload: {
-                    message: Joi.string().required()
+                    id: Joi.number()
                 }
+            },
+            handler: async (request) => {
+
+                const { Cards } = request.models();
+
+                return await Cards.query().throwIfNotFound().insertAndFetch((builder) => {
+                    builder.findById(request.params.id);
+                });
             }
-        },
-        handler: async (request) => {
-
-            const { credentials: user } = request.auth;
-            const { Comments } = request.models();
-            const comment = request.payload;
-
-            return await Comments.query().insertAndFetch({ message: comment.message, user_id: user.id, card_id: request.params.id });
         }
     }
 ];
