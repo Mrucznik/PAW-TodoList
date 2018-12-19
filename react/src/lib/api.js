@@ -165,6 +165,23 @@ class Api {
     return this.api.post('lists/' + listId + '/cards/order', params);
   }
 
+  // #### HISTORY
+
+  getBoardActionHistory(id){
+    this.setHeaders();
+    return this.api.get('history/boards/' + id);
+  }
+
+  getCurrentUserActionHistory(){
+    this.setHeaders();
+    return this.api.get('history/users');
+  }
+
+  getSelectUserActionHistory(id){
+    this.setHeaders();
+    return this.api.get('history/user/' + id);
+  }
+
 }
 
 export default Api;
