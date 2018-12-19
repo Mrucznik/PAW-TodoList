@@ -32,7 +32,7 @@ class BoardsPage extends Component {
     }
 
     prepareBoards() {
-        api.getBoards().then(res => {
+        api.getAllBoards().then(res => {
             const boards = res.data;
             this.setState({ boards });
         });
