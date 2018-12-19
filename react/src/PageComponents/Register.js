@@ -39,18 +39,29 @@ class Register extends Component {
       "password": password
     };
 
-    if(this.validateForm()){
+    if (this.validateForm()) {
       api.createUser(data)
-          .then(res => {
-            setToken(res.data.token);
-            this.setState({ isLogged: true })
-          })
-          .catch(err => notify.show("Something went wrong...",'error'))
+        .then(res => {
+          setToken(res.data.token);
+          this.setState({ isLogged: true })
+        })
+        .catch(function (error) {
+          if (error.response) {
+            if (error.response.request.status == 409) {
+              notify.show('This name is already taken!', 'error')
+            }
+            else {
+              notify.show("Something went wrong...", 'error')
+
+            }
+          }
+        }
+        )
     }
   }
-  
 
-  validateForm(){
+
+  validateForm() {
     const { userName, email, password } = this.state;
 
     if (!this.validateEmail(email)) {
@@ -61,7 +72,7 @@ class Register extends Component {
       notify.show("Password to short!", "error");
       return false;
     }
-    if (userName === null){
+    if (userName === null) {
       notify.show("Empty name!", "error");
       return false;
     }

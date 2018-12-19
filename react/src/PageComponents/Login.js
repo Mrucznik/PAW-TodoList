@@ -85,7 +85,7 @@ class Login extends Component {
             <br />
             <div>
               <div>
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">Name</label>
                 <input
                   className="login-input-text"
                   name="email"
@@ -93,7 +93,7 @@ class Login extends Component {
                   value={email}
                   required={true}
                   onChange={e => this.onChange(e)}
-                  placeholder="E-mail"
+                  placeholder="Name"
                 />
               </div>
               <div>
