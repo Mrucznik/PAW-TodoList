@@ -9,7 +9,7 @@ exports.up = function (knex, Promise) {
             table.text('name').notNullable();
             table.text('description');
             table.integer('position').notNullable();
-            table.timestamp('date');
+            table.timestamp('deadline');
             table.boolean('archived').defaultTo(false);
             table.integer('list_id').notNullable();
             table.index('list_id');
