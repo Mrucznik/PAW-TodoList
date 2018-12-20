@@ -44,18 +44,6 @@ code {
 
 }
 
-.Board{
-    position: relative;
-    float: left;
-
-    height: 100px;
-    width: 160px;
-
-    background-color: bisque;
-
-    margin: 5px;
-    padding: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
+.logout{
+    font-size: 170%;
 }

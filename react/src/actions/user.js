@@ -23,7 +23,7 @@ export function setCurrentUser(params) {
 }
 
 export function setToken(params) {
-  console.log(params)
+  console.log(params);
   return {
     type: "SET_TOKEN",
     payload: params
@@ -31,6 +31,7 @@ export function setToken(params) {
 }
 
 export function clearToken() {
+  localStorage.setItem("TOKEN", "");
   return {
     type: "CLEAR_TOKEN",
   }

@@ -1,0 +1,29 @@
+
+.Board{
+    position: relative;
+    float: left;
+
+    height: 100px;
+    width: 160px;
+
+    background-color: bisque;
+
+    margin: 5px;
+    padding: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.AddBoard{
+    border: none;
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+ }
+.AddBoard:hover{
+    background-color: navajowhite;
+    opacity: 0.7;
+}

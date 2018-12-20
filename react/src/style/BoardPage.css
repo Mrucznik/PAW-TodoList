@@ -19,7 +19,17 @@
     text-align: center;
     border-radius: 5px;
     padding: 10px;
-    max-width: 300px;
+    min-width: 15vw;
+}
+
+.addNewColumn{
+    display: table-cell;
+    background-color: #def1ff;
+    margin: 10px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px;
+    min-width: 15vw;
 }
 
 .card, .addCardButton{

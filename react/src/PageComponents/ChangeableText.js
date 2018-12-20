@@ -22,7 +22,7 @@ class ChangeableText extends Component {
                 this.setState({text: this.state.formAPI.getState().values.text});
                 axios({
                     method: 'PATCH',
-                    url: 'http://localhost:8080' + this.props.apiURL,
+                    url: 'http://5.133.9.55:8080' + this.props.apiURL,
                     data: {"name": this.state.formAPI.getState().values.text}
                 });
             }

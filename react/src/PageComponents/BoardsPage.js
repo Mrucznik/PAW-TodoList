@@ -5,6 +5,7 @@ import axios from "axios";
 import { connect } from 'react-redux';
 import store from "../store";
 import api from "../api";
+import "../style/BoardsPage.css"
 
 class Board extends Component {
     render(){
@@ -39,10 +40,19 @@ class BoardsPage extends Component {
     }
 
     render() {
+        console.log(this.props.location);
         return (
             <div>
                 <div className="body">
                     {this.state.boards.map(board => <Board name={board.name} id={board.id} />)}
+                    <div className={"Board"}>
+                        <button className={"AddBoard"} onClick={() => {
+                            api.createNewBoard({"name" : "New Board", "locked": false});
+                            this.prepareBoards()
+                        }}>
+                            Make new board
+                        </button>
+                    </div>
                 </div>
             </div>
         )

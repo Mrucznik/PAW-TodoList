@@ -1,7 +1,7 @@
 import axios from "axios";
 import store from "../store";
 
-const url = "http://localhost:8080/";
+const url = "http://5.133.9.55:8080/";
 
 class Api {
   constructor() {
@@ -158,7 +158,7 @@ class Api {
 
   createNewCardInList(listId, params){
     this.setHeaders();
-    return this.api.post('Plists/' + listId + '/cards', params);
+    return this.api.post('lists/' + listId + '/cards', params);
   }
 
   getCardsOrderInList(listId){
