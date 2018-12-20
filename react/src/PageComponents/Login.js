@@ -3,9 +3,8 @@ import { notify } from "react-notify-toast";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { setToken } from "../actions/user";
+import { setUser } from '../actions/user';
 import store from "../store";
-import api from "../api";
 
 class Login extends Component {
   constructor(props) {
@@ -33,7 +32,8 @@ class Login extends Component {
   onSubmit(e) {
     e.preventDefault();
     const { email, password } = this.state;
-    const { setToken } = this.props;
+    const { setUser } = this.props;
+
     let { errors } = this.state;
     const data = {
       name: email,
@@ -41,20 +41,15 @@ class Login extends Component {
     };
 
     if (email && password) {
-      // if (!this.validateEmail(email)) {
-      //   notify.show("Invalid email", "error");
-      //   errors.push("invalid email");
-      // } else {
       this.setState({ errors: [] });
-      api.setToken(data)
-        .then(res => {
-          setToken(res.data.token);
+
+      this.setState( () => {
+        setUser(data).then(res => {
           this.setState({ isLogged: true });
-        })
-        .catch(err => {
+        }).catch(err => {
           notify.show("invalid password or email", "error");
         });
-      //}
+      })
     }
   }
 
@@ -67,7 +62,6 @@ class Login extends Component {
     const { email, password, isLogged } = this.state;
 
     if (isLogged) {
-      //TODO: Delete dis
       console.log(store.getState().user.token);
       return <Redirect to="/boards" />;
     }
@@ -122,7 +116,11 @@ class Login extends Component {
   }
 }
 
-export default connect(
-  null,
-  { setToken }
-)(Login);
+const mapStateToProps = state => {
+  return {
+    user:state.user.current
+  }
+}
+
+
+export default connect(mapStateToProps, { setUser })(Login)

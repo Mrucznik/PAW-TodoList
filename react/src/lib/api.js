@@ -25,6 +25,12 @@ class Api {
     return this.api.post('users/register', params);
   }
 
+  getCurrentUse(){
+    this.setHeaders();
+    return this.api.get('user');
+
+  }
+
  // ##### BOARDS #####
 
   getAllBoards(){

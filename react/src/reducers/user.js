@@ -1,11 +1,19 @@
 const initialState = {
-  token:''
+  token: localStorage.getItem('TOKEN')
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case "SET_CURRENT_USER":
+      return {
+          ...state,
+          current:action.payload
+      }
     case "SET_TOKEN":
-      return Object.assign({}, state, { token: action.payload }) ;
+    return {
+      ...state,
+      token:action.payload
+  }
     case "CLEAR_TOKEN":
       return initialState;
     default:
