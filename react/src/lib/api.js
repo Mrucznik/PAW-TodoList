@@ -35,7 +35,7 @@ class Api {
 
   getAllBoards(){
     this.setHeaders();
-    return this.api.get('boards');
+    return this.api.get('user/boards');
   }
 
   createNewBoard(params){
@@ -85,7 +85,7 @@ class Api {
     return this.api.get('cards/' + id + '/comments');
 
   }
-  
+
   createCardComment(id, params){
     this.setHeaders();
     return this.api.post('cards/' + id + '/comments', params);

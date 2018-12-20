@@ -51,8 +51,14 @@ module.exports = [
                 }
             }
         },
-        handler: {
-            tandy: {}
+        handler: async (request) => {
+
+            const { Boards } = request.models();
+            const { credentials: user } = request.auth;
+
+            const result = request.payload;
+            result.user_id = user.id;
+            return await Boards.query().throwIfNotFound().insertAndFetch(result);
         }
     },
     {
